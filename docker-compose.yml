@@ -1,0 +1,7 @@
+services:
+  dash-site:
+    build: .
+    container_name: dash-site
+    restart: unless-stopped
+    ports:
+      - "3002:80"
