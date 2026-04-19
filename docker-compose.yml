@@ -1,10 +1,8 @@
 services:
   dash-site:
-    image: nginx:latest
+    build: .
     container_name: dash-site
     restart: unless-stopped
     ports:
       - "3002:80"
-    volumes:
-      # Change the left side to the actual path on your server
-      - .:/usr/share/nginx/html
+    # REMOVE any "volumes:" section for now to ensure it uses the GitHub files
