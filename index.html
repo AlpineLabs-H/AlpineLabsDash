@@ -1,224 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Dashboard — Alpine Labs</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#07090d;--s1:#0d1117;--s2:#131920;
-  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
-  --text:#dde4ed;--muted:#566474;--muted2:#8a9ab0;
-  --green:#3de88e;--blue:#4a9eff;--purple:#a78bfa;--amber:#fbbf24;--teal:#2dd4bf;
-  --mono:'DM Mono',monospace;--display:'Syne',sans-serif;
-}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--display);min-height:100vh;overflow-x:hidden;max-width:1280px;margin:0 auto;}
-a{text-decoration:none;color:inherit}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpine Labs | Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-black: #000000;
+      --card-bg: #0a0a0a;
+      --border: #1a1a1a;
+      --alpine-blue: #3b82f6;
+      --text-white: #ffffff;
+      --text-gray: #a1a1aa;
+      --badge-bg: rgba(59, 130, 246, 0.1);
+    }
 
-.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
-  background-size:40px 40px;
-  mask-image:radial-gradient(ellipse 90% 40% at 50% 0%,black,transparent)}
+    body {
+      background-color: var(--bg-black);
+      color: var(--text-white);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
 
-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;border-bottom:1px solid var(--border);background:rgba(7,9,13,0.88);backdrop-filter:blur(14px)}
-.nav-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px}
-.nav-logo{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:800;color:var(--text);letter-spacing:-.5px}
-.logo-icon{width:24px;height:24px;border-radius:5px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.nav-right{display:flex;align-items:center;gap:8px}
-.btn-sm{padding:6px 13px;border-radius:5px;font-family:var(--display);font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;gap:5px;border:1px solid var(--border2);color:var(--muted2);background:transparent;cursor:pointer;transition:all .15s}
-.btn-sm:hover{color:var(--text);border-color:rgba(255,255,255,0.25)}
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-.wrap{max-width:920px;margin:0 auto;padding:100px 2rem 80px;position:relative;z-index:1}
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      color: var(--text-white);
+    }
 
-.page-header{margin-bottom:48px}
-.eyebrow{font-family:var(--mono);font-size:11px;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem}
-.page-header h1{font-size:clamp(28px,3vw,42px);font-weight:800;letter-spacing:-1.5px;line-height:1.08;margin-bottom:.6rem}
-.page-header p{font-size:13px;color:var(--muted2);font-family:var(--mono)}
+    /* Hand-traced from image reference */
+    .alpine-logo-v2 {
+      width: 32px;
+      height: auto;
+      display: block;
+    }
 
-.section-label{font-family:var(--mono);font-size:11px;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:0}
-hr.div{border:none;border-top:1px solid var(--border);margin:32px 0 28px}
+    .btn-back {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-gray);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
 
-.card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:12px;transition:border-color .2s,transform .15s;cursor:pointer}
-.card:hover{border-color:var(--border2);transform:translateY(-2px)}
-.card-home{border-color:rgba(74,158,255,0.2)}
-.card-home:hover{border-color:rgba(74,158,255,0.4)}
+    .btn-back:hover {
+      border-color: var(--alpine-blue);
+      color: var(--text-white);
+      background: rgba(59, 130, 246, 0.05);
+    }
 
-.card-top{display:flex;align-items:center;justify-content:space-between}
-.card-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ic-blue{background:rgba(74,158,255,0.1)}
-.ic-green{background:rgba(61,232,142,0.1)}
-.ic-amber{background:rgba(251,191,36,0.08)}
-.ic-purple{background:rgba(167,139,250,0.1)}
-.ic-teal{background:rgba(45,212,191,0.1)}
-.card-arrow{color:var(--muted);font-size:14px;transition:color .15s}
-.card:hover .card-arrow{color:var(--muted2)}
+    .hero {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
 
-.card-name{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-.4px}
-.card-url{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:2px}
-.card-desc{font-family:var(--mono);font-size:12px;color:var(--muted2);line-height:1.6}
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--badge-bg);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      color: var(--alpine-blue);
+      font-weight: 500;
+      margin-bottom: 24px;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
 
-.card-footer{display:flex;align-items:center;gap:6px;margin-top:2px}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite;flex-shrink:0}
-.dot-amber{background:var(--amber)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.status-label{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin: 0 0 16px 0;
+      letter-spacing: -2px;
+    }
 
-footer{border-top:1px solid var(--border);padding:32px 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:relative;z-index:1;max-width:100%}
-.footer-inner{max-width:920px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-.footer-brand{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800;color:var(--muted)}
-.footer-copy{font-size:11.5px;color:var(--muted);opacity:.5;font-family:var(--mono)}
-</style>
+    h1 span { color: var(--alpine-blue); }
+
+    .subtext {
+      color: var(--text-gray);
+      max-width: 500px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card:hover {
+      border-color: var(--alpine-blue);
+      transform: translateY(-4px);
+      background: #0d0d0d;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .icon-box {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .card-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+
+    .card-url {
+      font-size: 0.8rem;
+      color: var(--alpine-blue);
+      margin-bottom: 12px;
+      font-family: ui-monospace, monospace;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-gray);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--text-gray);
+      background: rgba(255,255,255,0.03);
+      padding: 8px 12px;
+      border-radius: 8px;
+      width: fit-content;
+      font-family: ui-monospace, monospace;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+    }
+
+    .dot-amber { 
+      background: #f59e0b; 
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px; }
+      h1 { font-size: 2.5rem; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="grid-bg"></div>
-
-<nav>
-  <div class="nav-inner">
-    <a href="https://alpine-labs.net" class="nav-logo">
-      <div class="logo-icon">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L7 2L12 12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 8.5H10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-      </div>
-      alpine-labs
+  <nav>
+    <a href="https://alpine-labs.net" class="logo-container">
+      <img src="logo.svg" alt="alpine-labs" width="200" height="200">
     </a>
-    <div class="nav-right">
-      <a href="https://alpine-labs.net" class="btn-sm">← main site</a>
-    </div>
-  </div>
-</nav>
+    <a href="https://alpine-labs.net" class="btn-back">← Back to main site</a>
+  </nav>
 
-<div class="wrap">
+  <header class="hero">
+    <div class="badge">Internal Infrastructure</div>
+    <h1>Lab <span>Services.</span></h1>
+    <p class="subtext">Personal home laboratory and development environment. Small, focused nodes that solve real problems.</p>
+  </header>
 
-  <div class="page-header">
-    <div class="eyebrow">// dashboard</div>
-    <h1>Homelab.</h1>
-    <p>All services and subdomains in one place.</p>
-  </div>
-
-  <div class="section-label">// home</div>
-  <div class="grid">
-    <a href="https://alpine-labs.net" class="card card-home">
-      <div class="card-top">
-        <div class="card-icon ic-blue">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
-      <div>
-        <div class="card-name">alpine-labs.net</div>
-        <div class="card-url">alpine-labs.net</div>
-      </div>
-      <div class="card-desc">Main site. Products, about, and links to all subdomains.</div>
-      <div class="card-footer"><div class="dot"></div><span class="status-label">live</span></div>
-    </a>
-  </div>
-
-  <hr class="div"/>
-
-  <div class="section-label">// infrastructure</div>
   <div class="grid">
 
     <a href="https://pve.alpine-labs.net" class="card">
       <div class="card-top">
-        <div class="card-icon ic-amber">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <div class="icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         </div>
-        <span class="card-arrow">→</span>
+        <span style="color: var(--text-gray)">→</span>
       </div>
-      <div>
-        <div class="card-name">Proxmox</div>
-        <div class="card-url">pve.alpine-labs.net</div>
-      </div>
-      <div class="card-desc">Proxmox VE hypervisor. Manage VMs, containers, and storage.</div>
-      <div class="card-footer"><div class="dot"></div><span class="status-label">192.168.1.79:8006</span></div>
+      <div class="card-name">Proxmox</div>
+      <div class="card-url">pve.alpine-labs.net</div>
+      <p class="card-desc">Virtualization management for Debian-based VMs and containers.</p>
+      <div class="card-footer"><div class="dot"></div>192.168.1.79:8006</div>
     </a>
 
     <a href="https://prt.alpine-labs.net" class="card">
       <div class="card-top">
-        <div class="card-icon ic-blue">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4a9eff" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        <div class="icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
         </div>
-        <span class="card-arrow">→</span>
+        <span style="color: var(--text-gray)">→</span>
       </div>
-      <div>
-        <div class="card-name">Portainer</div>
-        <div class="card-url">prt.alpine-labs.net</div>
-      </div>
-      <div class="card-desc">Docker container management. Deploy and monitor containers.</div>
-      <div class="card-footer"><div class="dot"></div><span class="status-label">192.168.1.20:9443</span></div>
+      <div class="card-name">Portainer</div>
+      <div class="card-url">prt.alpine-labs.net</div>
+      <p class="card-desc">Container orchestration and monitoring for Docker environments.</p>
+      <div class="card-footer"><div class="dot"></div>192.168.1.20:9443</div>
     </a>
 
     <a href="https://nas.alpine-labs.net" class="card">
       <div class="card-top">
-        <div class="card-icon ic-teal">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        <div class="icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
         </div>
-        <span class="card-arrow">→</span>
+        <span style="color: var(--text-gray)">→</span>
       </div>
-      <div>
-        <div class="card-name">NAS</div>
-        <div class="card-url">nas.alpine-labs.net</div>
-      </div>
-      <div class="card-desc">TrueNAS SCALE. ZFS-mirrored storage and Jellyfin media server.</div>
-      <div class="card-footer"><div class="dot dot-amber"></div><span class="status-label">in progress</span></div>
-    </a>
-
-    <a href="https://rdb.alpine-labs.net" class="card">
-      <div class="card-top">
-        <div class="card-icon ic-purple">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
-      <div>
-        <div class="card-name">RavenDB</div>
-        <div class="card-url">rdb.alpine-labs.net</div>
-      </div>
-      <div class="card-desc">RavenDB studio. NVP package registry database.</div>
-      <div class="card-footer"><div class="dot"></div><span class="status-label">192.168.1.20:8080</span></div>
+      <div class="card-name">NAS</div>
+      <div class="card-url">nas.alpine-labs.net</div>
+      <p class="card-desc">ZFS-mirrored storage cluster and Jellyfin media hosting.</p>
+      <div class="card-footer"><div class="dot dot-amber"></div>Provisioning</div>
     </a>
 
   </div>
-
-  <hr class="div"/>
-
-  <div class="section-label">// projects</div>
-  <div class="grid">
-
-    <a href="https://nvp.alpine-labs.net" class="card">
-      <div class="card-top">
-        <div class="card-icon ic-green">
-          <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M2 12L7 2L12 12" stroke="#3de88e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 8.5H10" stroke="#3de88e" stroke-width="2" stroke-linecap="round"/></svg>
-        </div>
-        <span class="card-arrow">→</span>
-      </div>
-      <div>
-        <div class="card-name">NVP</div>
-        <div class="card-url">nvp.alpine-labs.net</div>
-      </div>
-      <div class="card-desc">Neovim package manager. C# API + C++ CLI + RavenDB registry.</div>
-      <div class="card-footer"><div class="dot"></div><span class="status-label">live</span></div>
-    </a>
-
-  </div>
-
-</div>
-
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="logo-icon" style="width:20px;height:20px;border-radius:4px">
-        <svg width="11" height="11" viewBox="0 0 14 14" fill="none"><path d="M2 12L7 2L12 12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 8.5H10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-      </div>
-      alpine-labs · dashboard
-    </div>
-    <span class="footer-copy">© 2026 AlpineLabs-H</span>
-  </div>
-</footer>
-
 </body>
 </html>
