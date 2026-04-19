@@ -7,4 +7,4 @@ services:
       - "3002:80"
     volumes:
       # Change the left side to the actual path on your server
-      - /home/user/dash-site:/usr/share/nginx/html/logo.svg
+      
